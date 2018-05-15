@@ -4,6 +4,18 @@ Class {
 	#category : #'Icetray-Core'
 }
 
+{ #category : #specs }
+ITBasicPresenter class >> basicNewWithOwner: anOwningPresenter [
+
+	| decorator decoree |
+	decorator := ITComponentDecorator owner: anOwningPresenter.
+	decoree := self basicNew
+		owner: decorator;
+		yourself.
+	decorator decoree: decoree.
+	^ decorator
+]
+
 { #category : #testing }
 ITBasicPresenter class >> isAbstract [
 
@@ -11,18 +23,11 @@ ITBasicPresenter class >> isAbstract [
 ]
 
 { #category : #specs }
-ITBasicPresenter class >> new [
-
-	^ self owner: nil
-]
-
-{ #category : #specs }
 ITBasicPresenter class >> owner: anOwningPresenter [
 
-	| decorator decoree |
-	decorator := ITComponentDecorator owner: anOwningPresenter.
-	decoree := super owner: decorator.
-	decorator decoree: decoree.
+	| decorator |
+	decorator := self basicNewWithOwner: anOwningPresenter.
+	decorator decoree initialize.
 	^ decorator
 ]
 

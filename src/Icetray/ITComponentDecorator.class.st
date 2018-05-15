@@ -16,9 +16,9 @@ ITComponentDecorator class >> defaultSpec [
 	^ SpecLayout composed 
 		newColumn: [ :column |
 			column 
-				newRow: #toolbar;
+				newRow: #toolbar height: ITToolBar defaultHeight;
 				newRow: #decoree;
-				newRow: #statusbar height: IceTipToolbar statusBarHeight ]
+				newRow: #statusbar height: ITToolBar statusBarHeight ]
 ]
 
 { #category : #accessing }

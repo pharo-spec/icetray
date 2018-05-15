@@ -44,6 +44,12 @@ ITToolBar class >> defaultSpec [
 ]
 
 { #category : #accessing }
+ITToolBar class >> statusBarHeight [
+	
+	^ 25
+]
+
+{ #category : #accessing }
 ITToolBar >> addItem: aToolbarItem [
 	
 	self addItem: aToolbarItem position: ITItemPosition left
