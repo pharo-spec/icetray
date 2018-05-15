@@ -33,7 +33,7 @@ ITToolbar class >> defaultSpec [
 	<spec: #default>
 
 	^ SpecLayout composed
-		newRow: #panel
+		newRow: #panel height: self defaultHeight
 ]
 
 { #category : #accessing }
@@ -42,7 +42,7 @@ ITToolbar >> addItemsFromContext: aContext [
 	
 	menu := CmdMenu activatedBy: ITToolbarActivation.
 	menu buildInContext: aContext.
-	menu buildIceToolbarOn: self
+	menu buildToolbarOn: self
 
 ]
 
@@ -71,7 +71,7 @@ ITToolbar >> refresh [
 	self rightPanel removeAllMorphs.
 	items do: [ :each |  
 		each position 
-			addItem: (each newToolbarButtonOn: self) 
+			addItem: (each buildMorphOnToolbar: self) 
 			into: self ]
 ]
 
