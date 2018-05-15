@@ -50,6 +50,12 @@ ITComponentDecorator >> statusbar: anObject [
 ]
 
 { #category : #accessing }
+ITComponentDecorator >> title [
+
+	^ decoree title
+]
+
+{ #category : #accessing }
 ITComponentDecorator >> toolbar [
 	^ toolbar
 ]

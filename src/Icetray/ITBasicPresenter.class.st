@@ -1,19 +1,33 @@
 Class {
-	#name : #ITExamplePresenter,
-	#superclass : #ITBasicPresenter,
-	#category : #'Icetray-Examples'
+	#name : #ITBasicPresenter,
+	#superclass : #ComposablePresenter,
+	#category : #'Icetray-Core'
 }
 
+{ #category : #testing }
+ITBasicPresenter class >> isAbstract [
+
+	^ self == ITBasicPresenter
+]
+
 { #category : #specs }
-ITExamplePresenter class >> defaultSpec [
-	<spec: #default>
-	
-	^ SpecLayout composed 
-			newColumn: [ :column | ]
+ITBasicPresenter class >> new [
+
+	^ self owner: nil
+]
+
+{ #category : #specs }
+ITBasicPresenter class >> owner: anOwningPresenter [
+
+	| decorator decoree |
+	decorator := ITComponentDecorator owner: anOwningPresenter.
+	decoree := super owner: decorator.
+	decorator decoree: decoree.
+	^ decorator
 ]
 
 { #category : #initialization }
-ITExamplePresenter >> initializeWidgets [
+ITBasicPresenter >> initializeWidgets [
 
 	self toolbar
 		addItem: (ITButton new
@@ -64,8 +78,14 @@ ITExamplePresenter >> initializeWidgets [
 		position: ITItemPosition right
 ]
 
-{ #category : #initialization }
-ITExamplePresenter >> title [
+{ #category : #accessing }
+ITBasicPresenter >> statusbar [
+	
+	^ self owner statusbar
+]
 
-	^ 'Example IceTray Presenter'
+{ #category : #initialization }
+ITBasicPresenter >> toolbar [
+
+	^ self owner toolbar
 ]
