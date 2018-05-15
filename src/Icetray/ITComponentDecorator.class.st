@@ -35,8 +35,8 @@ ITComponentDecorator >> decoree: aPresenter [
 { #category : #initialization }
 ITComponentDecorator >> initializeWidgets [
 	
-	toolbar := self instantiate: ITToolbar.
-	statusbar := self instantiate: ITToolbar.
+	toolbar := self instantiate: ITToolBar.
+	statusbar := self instantiate: ITToolBar.
 ]
 
 { #category : #accessing }

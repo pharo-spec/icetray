@@ -1,7 +1,7 @@
-Extension { #name : #ITToolbar }
+Extension { #name : #ITToolBar }
 
 { #category : #'*Icetray-Commander' }
-ITToolbar >> addItemsFromContext: aContext [
+ITToolBar >> addItemsFromContext: aContext [
 	| menu |
 	
 	menu := CmdMenu activatedBy: ITToolbarActivation.

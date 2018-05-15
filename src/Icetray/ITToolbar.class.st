@@ -1,79 +1,42 @@
-"
-ITToolbar new
-	addItem: (ITButton new
-		label: 'Button';
-		icon: #edit asIcon;
-		position: ITItemPosition left;
-		help: 'Activate me!';
-		badge: '1';
-		action: [ self inform: 'test' ];
-		yourself);
-	addItem: (ITToggleButton new
-		label: 'Toggle';
-		icon: #edit asIcon;
-		position: ITItemPosition left;
-		help: 'Toggle me!';
-		badge: '1';
-		action: [ :activated | self inform: activated asString ];
-		yourself);
-	addItem: (ITOptionButtonGroup new
-		position: ITItemPosition left;
-		addOption: (ITOptionButton new
-			label: 'Left';
-			icon: #add asIcon;
-			help: 'Add me!';
-			badge: '1';
-			action: [ self inform: 'Added' ];
-			yourself);
-		addOption: (ITOptionButton new
-			label: 'Middle';
-			icon: #changeUpdate asIcon;
-			help: 'Update me!';
-			badge: '2';
-			action: [ self inform: 'Removed' ];
-			yourself);
-		addOption: (ITOptionButton new
-			label: 'Right';
-			icon: #changeRemove asIcon;
-			help: 'Remove me!';
-			badge: '3';
-			action: [ self inform: 'Removed' ];
-			yourself);
-		yourself);
-	openWithSpec.
-"
 Class {
-	#name : #ITToolbar,
-	#superclass : #ITItemBar,
+	#name : #ITToolBar,
+	#superclass : #ComposablePresenter,
 	#instVars : [
-		'toolbarItemFont',
-		'displayMode'
+		'panel',
+		'leftPanel',
+		'rightPanel',
+		'items',
+		'color',
+		'leftItems',
+		'rightItems',
+		'displayMode',
+		'toolbarItemFont'
 	],
 	#category : #'Icetray-Core'
 }
 
 { #category : #accessing }
-ITToolbar class >> defaultHeight [
+ITToolBar class >> defaultHeight [
 	^ self defaultMode height
 ]
 
 { #category : #accessing }
-ITToolbar class >> defaultItemSeparation [
+ITToolBar class >> defaultItemSeparation [
 	^ 0
 ]
 
 { #category : #accessing }
-ITToolbar class >> defaultItemSize [
+ITToolBar class >> defaultItemSize [
 	^ 50
 ]
 
 { #category : #accessing }
-ITToolbar class >> defaultMode [
+ITToolBar class >> defaultMode [
 	^ ITToolbarDisplayMode default
 ]
 
 { #category : #specs }
-ITToolbar class >> defaultSpec [
+ITToolBar class >> defaultSpec [
 	<spec: #default>
 
 	^ SpecLayout composed
@@ -81,17 +44,109 @@ ITToolbar class >> defaultSpec [
 ]
 
 { #category : #accessing }
-ITToolbar >> displayMode [
+ITToolBar >> addItem: aToolbarItem [
+	
+	self addItem: aToolbarItem position: ITItemPosition left
+]
+
+{ #category : #accessing }
+ITToolBar >> addItem: aToolbarItem position: aPosition [
+
+	aPosition addItem: aToolbarItem into: self.
+	self refresh.
+]
+
+{ #category : #'private dispatch' }
+ITToolBar >> addItemLeft: anItem [
+	
+	leftItems add: anItem
+]
+
+{ #category : #'private dispatch' }
+ITToolBar >> addItemRight: anItem [
+	
+	rightItems add: anItem
+]
+
+{ #category : #accessing }
+ITToolBar >> color [
+	^ color ifNil: [ Color transparent ]
+]
+
+{ #category : #accessing }
+ITToolBar >> color: aColor [
+	color := aColor
+]
+
+{ #category : #accessing }
+ITToolBar >> displayMode [
 	^ displayMode ifNil: [ displayMode := ITToolbarDisplayMode default ]
 ]
 
 { #category : #accessing }
-ITToolbar >> displayMode: anObject [
+ITToolBar >> displayMode: anObject [
 	displayMode := anObject
 ]
 
+{ #category : #initialization }
+ITToolBar >> initialize [
+	super initialize.
+	leftItems := OrderedCollection new.
+	rightItems := OrderedCollection new.
+]
+
+{ #category : #initialization }
+ITToolBar >> initializeWidgets [
+	leftPanel := self newPanelMorph.
+	rightPanel := self newPanelMorph
+		listDirection: #rightToLeft;
+		hResizing: #spaceFill.
+
+	panel := PanelMorph new 
+		changeTableLayout;
+		listDirection: #leftToRight;
+		hResizing: #spaceFill;
+		vResizing: #spaceFill;
+		color: self color;
+		asSpecAdapter.
+
+	panel widget 
+		addMorphBack: leftPanel;
+		addMorphBack: rightPanel
+
+]
+
+{ #category : #accessing }
+ITToolBar >> items: aCollection [
+	"We expect a collection to be made of specs"
+	items := aCollection asOrderedCollection.
+	self refresh
+]
+
+{ #category : #'private accessing' }
+ITToolBar >> leftPanel [
+	^ leftPanel
+]
+
+{ #category : #'private accessing' }
+ITToolBar >> leftPanel: anObject [
+	leftPanel := anObject
+]
+
 { #category : #'private factory' }
-ITToolbar >> newToolbarItemFont [
+ITToolBar >> newPanelMorph [
+	^ PanelMorph new 
+		changeTableLayout;
+		listDirection: #leftToRight;
+		hResizing: #spaceFill;
+		vResizing: #spaceFill;
+		cellInset: self class defaultItemSeparation@0;
+		color: self color;
+		yourself
+]
+
+{ #category : #'private factory' }
+ITToolBar >> newToolbarItemFont [
 	| buttonFont |
 	buttonFont := Smalltalk ui theme buttonFont.
 	^ LogicalFont 
@@ -99,8 +154,18 @@ ITToolbar >> newToolbarItemFont [
 		pointSize: buttonFont pointSize - 3
 ]
 
+{ #category : #'accessing ui' }
+ITToolBar >> panel [
+	^ panel
+]
+
+{ #category : #'accessing ui' }
+ITToolBar >> panel: anObject [
+	panel := anObject
+]
+
 { #category : #accessing }
-ITToolbar >> rebuildLeftPanel [
+ITToolBar >> rebuildLeftPanel [
 	
 	self leftPanel removeAllMorphs.
 	leftItems do: [ :each | 
@@ -110,7 +175,7 @@ ITToolbar >> rebuildLeftPanel [
 ]
 
 { #category : #accessing }
-ITToolbar >> rebuildRightPanel [
+ITToolBar >> rebuildRightPanel [
 	
 	self rightPanel removeAllMorphs.
 	rightItems do: [ :each | 
@@ -120,23 +185,33 @@ ITToolbar >> rebuildRightPanel [
 ]
 
 { #category : #accessing }
-ITToolbar >> refresh [
+ITToolBar >> refresh [
 
 	self rebuildLeftPanel.
 	self rebuildRightPanel.
 ]
 
+{ #category : #'private accessing' }
+ITToolBar >> rightPanel [
+	^ rightPanel
+]
+
+{ #category : #'private accessing' }
+ITToolBar >> rightPanel: anObject [
+	rightPanel := anObject
+]
+
 { #category : #accessing }
-ITToolbar >> toolbarItemFont [
+ITToolBar >> toolbarItemFont [
 	^ toolbarItemFont ifNil: [ toolbarItemFont := self newToolbarItemFont ]
 ]
 
 { #category : #accessing }
-ITToolbar >> toolbarItemFont: anObject [
+ITToolBar >> toolbarItemFont: anObject [
 	toolbarItemFont := anObject
 ]
 
 { #category : #accessing }
-ITToolbar >> toolbarItemSize [
+ITToolBar >> toolbarItemSize [
 	^ self class defaultItemSize
 ]
