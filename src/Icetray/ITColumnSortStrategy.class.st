@@ -28,6 +28,14 @@ ITColumnSortStrategy >> direction: aString [
 	direction := aString
 ]
 
+{ #category : #accessing }
+ITColumnSortStrategy >> directionArrowCharacter [
+
+	^ self isAscending
+		ifTrue: [ '^' ]
+		ifFalse: [ 'v' ]
+]
+
 { #category : #testing }
 ITColumnSortStrategy >> isAscending [
 	
