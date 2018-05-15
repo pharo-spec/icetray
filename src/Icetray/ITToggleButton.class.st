@@ -7,8 +7,7 @@ Class {
 { #category : #factory }
 ITToggleButton >> buildMorphOnToolbar: aToolbar [
 	| button |
-	
-	1halt.
+
 	button := (ITToggleButtonMorph
 		on: self 
 			getState: nil 
@@ -29,12 +28,6 @@ ITToggleButton >> buildMorphOnToolbar: aToolbar [
 		item: self.
 
 	^ button
-]
-
-{ #category : #execution }
-ITToggleButton >> execute [
-	1halt
-	self action cull: self
 ]
 
 { #category : #execution }
