@@ -23,6 +23,12 @@ ITBasicPresenter class >> isAbstract [
 ]
 
 { #category : #specs }
+ITBasicPresenter class >> new [
+
+	^ self owner: nil
+]
+
+{ #category : #specs }
 ITBasicPresenter class >> owner: anOwningPresenter [
 
 	| decorator |
