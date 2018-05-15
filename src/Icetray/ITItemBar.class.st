@@ -57,7 +57,7 @@ ITItemBar >> initializeWidgets [
 		vResizing: #spaceFill;
 		color: self color;
 		asSpecAdapter.
-		
+
 	panel widget 
 		addMorphBack: leftPanel;
 		addMorphBack: rightPanel

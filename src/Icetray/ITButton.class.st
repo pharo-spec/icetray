@@ -1,12 +1,11 @@
 Class {
 	#name : #ITButton,
-	#superclass : #Object,
+	#superclass : #ITItem,
 	#instVars : [
 		'label',
 		'icon',
 		'action',
 		'help',
-		'position',
 		'badge'
 	],
 	#category : #'Icetray-items'
@@ -32,22 +31,12 @@ ITButton >> badge: aString [
 	badge := aString
 ]
 
-{ #category : #accessing }
-ITButton >> bePositionLeft [
-	self position: ITItemPosition left
-]
-
-{ #category : #accessing }
-ITButton >> bePositionRight [
-	self position: ITItemPosition right
-]
-
 { #category : #factory }
 ITButton >> buildMorphOnToolbar: aToolbar [
 	| button |
 	
 	button := (ITButtonMorph
-		on: self 
+			on: self 
 			getState: nil 
 			action:  #execute)
 		helpText: self help;
@@ -101,14 +90,4 @@ ITButton >> label [
 { #category : #accessing }
 ITButton >> label: anObject [
 	label := anObject
-]
-
-{ #category : #accessing }
-ITButton >> position [
-	^ position ifNil: [ ITItemPosition default ]
-]
-
-{ #category : #accessing }
-ITButton >> position: aPosition [
-	position := aPosition
 ]

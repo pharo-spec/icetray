@@ -71,7 +71,7 @@ ITToolbar >> refresh [
 	self rightPanel removeAllMorphs.
 	items do: [ :each |  
 		each position 
-			addItem: (each buildMorphOnToolbar: self) 
+			addItem: (each buildMorphOnToolbar: self)
 			into: self ]
 ]
 

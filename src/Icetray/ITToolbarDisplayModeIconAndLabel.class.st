@@ -7,15 +7,9 @@ Class {
 { #category : #configuring }
 ITToolbarDisplayModeIconAndLabel >> configureButton: aButton item: aToolbarItem [
 	"ask for icon and label"
-	aButton 
-		on: aToolbarItem 
-		getState: nil
-		action: aButton actionSelector
-		label: #label 
-		icon: #icon 
-		menu: nil.
-		
-	aButton badgeSelector: #badge
+	aButton getLabelSelector: #label.
+	aButton getIconSelector: #icon.
+	aButton badgeSelector: #badge.
 ]
 
 { #category : #accessing }
