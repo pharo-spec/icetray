@@ -1,6 +1,6 @@
 Extension { #name : #CmdCommandActivator }
 
-{ #category : #'*Icetray' }
+{ #category : #'*Icetray-Commander' }
 CmdCommandActivator >> buildToolbarItem [
 	| item |
 

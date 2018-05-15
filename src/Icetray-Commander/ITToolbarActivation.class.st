@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'position'
 	],
-	#category : #Icetray
+	#category : #'Icetray-Commander'
 }
 
 { #category : #'instance creation' }

@@ -1,6 +1,6 @@
 Extension { #name : #CmdMenu }
 
-{ #category : #'*Icetray' }
+{ #category : #'*Icetray-Commander' }
 CmdMenu >> buildToolbarOn: aToobar [
 	self rootGroup buildToolbarOn: aToobar
 ]

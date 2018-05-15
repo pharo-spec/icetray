@@ -37,16 +37,6 @@ ITToolbar class >> defaultSpec [
 ]
 
 { #category : #accessing }
-ITToolbar >> addItemsFromContext: aContext [
-	| menu |
-	
-	menu := CmdMenu activatedBy: ITToolbarActivation.
-	menu buildInContext: aContext.
-	menu buildToolbarOn: self
-
-]
-
-{ #category : #accessing }
 ITToolbar >> displayMode [
 	^ displayMode ifNil: [ displayMode := ITToolbarDisplayMode default ]
 ]
