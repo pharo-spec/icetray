@@ -8,7 +8,7 @@ Class {
 		'items',
 		'color'
 	],
-	#category : #Icetray
+	#category : #'Icetray-Core'
 }
 
 { #category : #accessing }

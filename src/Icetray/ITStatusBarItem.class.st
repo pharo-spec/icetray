@@ -6,7 +6,7 @@ Class {
 		'help',
 		'position'
 	],
-	#category : #Icetray
+	#category : #'Icetray-Core'
 }
 
 { #category : #accessing }

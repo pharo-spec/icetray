@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #Icetray
+	#category : #'Icetray-Core'
 }
 
 { #category : #accessing }

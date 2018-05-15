@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'target'
 	],
-	#category : #Icetray
+	#category : #'Icetray-Core'
 }
 
 { #category : #accessing }

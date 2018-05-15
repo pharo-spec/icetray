@@ -1,7 +1,7 @@
 Class {
 	#name : #ITStatusBar,
 	#superclass : #ITItemBar,
-	#category : #Icetray
+	#category : #'Icetray-Core'
 }
 
 { #category : #accessing }

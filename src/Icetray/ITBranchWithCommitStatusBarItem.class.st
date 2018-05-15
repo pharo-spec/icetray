@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'model'
 	],
-	#category : #Icetray
+	#category : #'Icetray-Core'
 }
 
 { #category : #factory }

@@ -5,7 +5,7 @@ Class {
 		'toolbarItemFont',
 		'displayMode'
 	],
-	#category : #Icetray
+	#category : #'Icetray-Core'
 }
 
 { #category : #accessing }
@@ -34,6 +34,16 @@ ITToolbar class >> defaultSpec [
 
 	^ SpecLayout composed
 		newRow: #panel height: self defaultHeight
+]
+
+{ #category : #'as yet unclassified' }
+ITToolbar >> addItemsFromContext: aContext [
+	| menu |
+	
+	menu := CmdMenu activatedBy: ITToolbarActivation.
+	menu buildInContext: aContext.
+	menu buildToolbarOn: self
+
 ]
 
 { #category : #accessing }

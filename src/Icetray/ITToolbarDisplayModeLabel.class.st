@@ -1,7 +1,7 @@
 Class {
 	#name : #ITToolbarDisplayModeLabel,
 	#superclass : #ITToolbarDisplayMode,
-	#category : #Icetray
+	#category : #'Icetray-Core'
 }
 
 { #category : #configuring }
