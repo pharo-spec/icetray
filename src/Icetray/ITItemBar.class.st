@@ -6,25 +6,36 @@ Class {
 		'leftPanel',
 		'rightPanel',
 		'items',
-		'color'
+		'color',
+		'leftItems',
+		'rightItems'
 	],
 	#category : #'Icetray-Core'
 }
 
 { #category : #accessing }
 ITItemBar >> addItem: aToolbarItem [
-	items add: aToolbarItem.
-	self refresh
+	
+	self addItem: aToolbarItem position: ITItemPosition left
+]
+
+{ #category : #accessing }
+ITItemBar >> addItem: aToolbarItem position: aPosition [
+
+	aPosition addItem: aToolbarItem into: self.
+	self refresh.
 ]
 
 { #category : #'private dispatch' }
-ITItemBar >> addItemLeft: aButton [
-	self leftPanel addMorphBack: aButton
+ITItemBar >> addItemLeft: anItem [
+	
+	leftItems add: anItem
 ]
 
 { #category : #'private dispatch' }
-ITItemBar >> addItemRight: aButton [
-	self rightPanel addMorphBack: aButton
+ITItemBar >> addItemRight: anItem [
+	
+	rightItems add: anItem
 ]
 
 { #category : #accessing }
@@ -40,7 +51,8 @@ ITItemBar >> color: aColor [
 { #category : #initialization }
 ITItemBar >> initialize [
 	super initialize.
-	items := OrderedCollection new
+	leftItems := OrderedCollection new.
+	rightItems := OrderedCollection new.
 ]
 
 { #category : #initialization }
@@ -101,6 +113,12 @@ ITItemBar >> panel [
 { #category : #'accessing ui' }
 ITItemBar >> panel: anObject [
 	panel := anObject
+]
+
+{ #category : #accessing }
+ITItemBar >> refresh [
+
+	"Hook for subclasses"
 ]
 
 { #category : #'private accessing' }

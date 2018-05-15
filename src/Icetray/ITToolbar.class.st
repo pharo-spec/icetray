@@ -80,16 +80,6 @@ ITToolbar class >> defaultSpec [
 		newRow: #panel height: self defaultHeight
 ]
 
-{ #category : #'as yet unclassified' }
-ITToolbar >> addItemsFromContext: aContext [
-	| menu |
-	
-	menu := CmdMenu activatedBy: ITToolbarActivation.
-	menu buildInContext: aContext.
-	menu buildToolbarOn: self
-
-]
-
 { #category : #accessing }
 ITToolbar >> displayMode [
 	^ displayMode ifNil: [ displayMode := ITToolbarDisplayMode default ]
@@ -110,13 +100,24 @@ ITToolbar >> newToolbarItemFont [
 ]
 
 { #category : #accessing }
-ITToolbar >> refresh [
+ITToolbar >> rebuildLeftPanel [
+	
 	self leftPanel removeAllMorphs.
+	leftItems do: [ :each | leftPanel addMorphBack: (each buildMorphOnToolbar: self) ]
+]
+
+{ #category : #accessing }
+ITToolbar >> rebuildRightPanel [
+	
 	self rightPanel removeAllMorphs.
-	items do: [ :each |  
-		each position 
-			addItem: (each buildMorphOnToolbar: self)
-			into: self ]
+	rightItems do: [ :each | rightPanel addMorphBack: (each buildMorphOnToolbar: self) ]
+]
+
+{ #category : #accessing }
+ITToolbar >> refresh [
+
+	self rebuildLeftPanel.
+	self rebuildRightPanel.
 ]
 
 { #category : #accessing }
