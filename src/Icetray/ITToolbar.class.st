@@ -1,3 +1,47 @@
+"
+ITToolbar new
+	addItem: (ITButton new
+		label: 'Button';
+		icon: #edit asIcon;
+		position: ITItemPosition left;
+		help: 'Activate me!';
+		badge: '1';
+		action: [ self inform: 'test' ];
+		yourself);
+	addItem: (ITToggleButton new
+		label: 'Toggle';
+		icon: #edit asIcon;
+		position: ITItemPosition left;
+		help: 'Toggle me!';
+		badge: '1';
+		action: [ :activated | self inform: activated asString ];
+		yourself);
+	addItem: (ITOptionButtonGroup new
+		position: ITItemPosition left;
+		addOption: (ITOptionButton new
+			label: 'Left';
+			icon: #add asIcon;
+			help: 'Add me!';
+			badge: '1';
+			action: [ self inform: 'Added' ];
+			yourself);
+		addOption: (ITOptionButton new
+			label: 'Middle';
+			icon: #changeUpdate asIcon;
+			help: 'Update me!';
+			badge: '2';
+			action: [ self inform: 'Removed' ];
+			yourself);
+		addOption: (ITOptionButton new
+			label: 'Right';
+			icon: #changeRemove asIcon;
+			help: 'Remove me!';
+			badge: '3';
+			action: [ self inform: 'Removed' ];
+			yourself);
+		yourself);
+	openWithSpec.
+"
 Class {
 	#name : #ITToolbar,
 	#superclass : #ITItemBar,
