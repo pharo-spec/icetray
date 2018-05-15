@@ -3,7 +3,8 @@ Class {
 	#superclass : #FTColumn,
 	#instVars : [
 		'action',
-		'icon'
+		'icon',
+		'alignment'
 	],
 	#category : #'Icetray-FastTable'
 }
@@ -32,6 +33,24 @@ ITPropertyBasedColumn >> action: aSymbolOrBlock [
 ]
 
 { #category : #accessing }
+ITPropertyBasedColumn >> alignment [
+	^ alignment
+]
+
+{ #category : #accessing }
+ITPropertyBasedColumn >> alignment: aSymbol [
+	"One of #center, #left or #right"
+	
+	alignment := aSymbol
+]
+
+{ #category : #accessing }
+ITPropertyBasedColumn >> execute [
+
+	1halt.
+]
+
+{ #category : #accessing }
 ITPropertyBasedColumn >> icon [
 	^ icon
 ]
@@ -39,6 +58,13 @@ ITPropertyBasedColumn >> icon [
 { #category : #accessing }
 ITPropertyBasedColumn >> icon: aSymbolOrBlock [
 	icon := aSymbolOrBlock
+]
+
+{ #category : #accessing }
+ITPropertyBasedColumn >> initialize [
+
+	super initialize.
+	alignment := #left
 ]
 
 { #category : #factory }
