@@ -1,5 +1,5 @@
 Class {
-	#name : #ITToolbarButton,
+	#name : #ITButton,
 	#superclass : #Object,
 	#instVars : [
 		'label',
@@ -9,44 +9,44 @@ Class {
 		'position',
 		'badge'
 	],
-	#category : #Icetray
+	#category : #'Icetray-items'
 }
 
 { #category : #accessing }
-ITToolbarButton >> action [
+ITButton >> action [
 	^ action
 ]
 
 { #category : #accessing }
-ITToolbarButton >> action: anObject [
+ITButton >> action: anObject [
 	action := anObject
 ]
 
 { #category : #accessing }
-ITToolbarButton >> badge [
+ITButton >> badge [
 	^ badge
 ]
 
 { #category : #accessing }
-ITToolbarButton >> badge: aString [
+ITButton >> badge: aString [
 	badge := aString
 ]
 
 { #category : #accessing }
-ITToolbarButton >> bePositionLeft [
+ITButton >> bePositionLeft [
 	self position: ITItemPosition left
 ]
 
 { #category : #accessing }
-ITToolbarButton >> bePositionRight [
+ITButton >> bePositionRight [
 	self position: ITItemPosition right
 ]
 
 { #category : #factory }
-ITToolbarButton >> buildMorphOnToolbar: aToolbar [
+ITButton >> buildMorphOnToolbar: aToolbar [
 	| button |
 	
-	button := (ITToolbarItemButtonMorph
+	button := (ITButtonMorph
 		on: self 
 			getState: nil 
 			action:  #execute)
@@ -69,46 +69,46 @@ ITToolbarButton >> buildMorphOnToolbar: aToolbar [
 ]
 
 { #category : #execution }
-ITToolbarButton >> execute [
+ITButton >> execute [
 	self action cull: self
 ]
 
 { #category : #accessing }
-ITToolbarButton >> help [
+ITButton >> help [
 	^ help
 ]
 
 { #category : #accessing }
-ITToolbarButton >> help: anObject [
+ITButton >> help: anObject [
 	help := anObject
 ]
 
 { #category : #accessing }
-ITToolbarButton >> icon [
+ITButton >> icon [
 	^ icon
 ]
 
 { #category : #accessing }
-ITToolbarButton >> icon: anObject [
+ITButton >> icon: anObject [
 	icon := anObject
 ]
 
 { #category : #accessing }
-ITToolbarButton >> label [
+ITButton >> label [
 	^ label
 ]
 
 { #category : #accessing }
-ITToolbarButton >> label: anObject [
+ITButton >> label: anObject [
 	label := anObject
 ]
 
 { #category : #accessing }
-ITToolbarButton >> position [
+ITButton >> position [
 	^ position ifNil: [ ITItemPosition default ]
 ]
 
 { #category : #accessing }
-ITToolbarButton >> position: aPosition [
+ITButton >> position: aPosition [
 	position := aPosition
 ]

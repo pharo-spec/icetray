@@ -4,7 +4,7 @@ Extension { #name : #CmdCommandActivator }
 CmdCommandActivator >> buildToolbarItem [
 	| item |
 
-	item := (ITToolbarButton new
+	item := (ITButton new
 		label: self activationStrategy toolbarName;
 		icon: self menuItemIcon;
 		position: self activationStrategy position;

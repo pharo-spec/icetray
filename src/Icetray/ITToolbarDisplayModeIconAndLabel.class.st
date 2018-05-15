@@ -10,13 +10,12 @@ ITToolbarDisplayModeIconAndLabel >> configureButton: aButton item: aToolbarItem 
 	aButton 
 		on: aToolbarItem 
 		getState: nil
-		action: #execute
+		action: aButton actionSelector
 		label: #label 
 		icon: #icon 
 		menu: nil.
 		
 	aButton badgeSelector: #badge
-
 ]
 
 { #category : #accessing }

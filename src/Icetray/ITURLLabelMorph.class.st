@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'onClickBlock'
 	],
-	#category : #Icetray
+	#category : #'Icetray-Morphs'
 }
 
 { #category : #initialization }

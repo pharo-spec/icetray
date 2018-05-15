@@ -1,41 +1,41 @@
 Class {
-	#name : #ITToolbarItemButtonMorph,
+	#name : #ITButtonMorph,
 	#superclass : #PluggableButtonMorph,
 	#instVars : [
 		'badgeFont',
 		'badgeSelector'
 	],
-	#category : #Icetray
+	#category : #'Icetray-Morphs'
 }
 
 { #category : #accessing }
-ITToolbarItemButtonMorph >> badge [
+ITButtonMorph >> badge [
 	badgeSelector ifNil: [ ^ nil ].
 	^ self model perform: badgeSelector
 ]
 
 { #category : #accessing }
-ITToolbarItemButtonMorph >> badgeColor [
+ITButtonMorph >> badgeColor [
 	^ Smalltalk ui theme badgeColor
 ]
 
 { #category : #accessing }
-ITToolbarItemButtonMorph >> badgeFont [
+ITButtonMorph >> badgeFont [
 	^ badgeFont ifNil: [ badgeFont := self newBadgeFont ]
 ]
 
 { #category : #accessing }
-ITToolbarItemButtonMorph >> badgeSelector: aSymbol [
+ITButtonMorph >> badgeSelector: aSymbol [
 	badgeSelector := aSymbol
 ]
 
 { #category : #accessing }
-ITToolbarItemButtonMorph >> badgeTextColor [
+ITButtonMorph >> badgeTextColor [
 	^ Smalltalk ui theme badgeTextColor
 ]
 
-{ #category : #drawing }
-ITToolbarItemButtonMorph >> drawBadgeOn: aCanvas [
+{ #category : #accessing }
+ITButtonMorph >> drawBadgeOn: aCanvas [
 	| badgeString badgeBounds textBounds textWidth textHeight width |
 	
 	badgeString := self badge asString.
@@ -57,20 +57,20 @@ ITToolbarItemButtonMorph >> drawBadgeOn: aCanvas [
 		color: self badgeTextColor
 ]
 
-{ #category : #drawing }
-ITToolbarItemButtonMorph >> drawOn: aCanvas [
+{ #category : #accessing }
+ITButtonMorph >> drawOn: aCanvas [
 	super drawOn: aCanvas.
 	self hasBadge
 		ifTrue: [ self drawBadgeOn: aCanvas ]
 ]
 
-{ #category : #testing }
-ITToolbarItemButtonMorph >> hasBadge [
+{ #category : #accessing }
+ITButtonMorph >> hasBadge [
 	^ self badge notNil
 ]
 
-{ #category : #drawing }
-ITToolbarItemButtonMorph >> newBadgeFont [
+{ #category : #accessing }
+ITButtonMorph >> newBadgeFont [
 	| baseBadgeFont |
 	baseBadgeFont := StandardFonts codeFont.
  	^ (LogicalFont 
@@ -79,14 +79,14 @@ ITToolbarItemButtonMorph >> newBadgeFont [
 			weightValue: 700
 ]
 
-{ #category : #style }
-ITToolbarItemButtonMorph >> normalBorderStyle [
+{ #category : #accessing }
+ITButtonMorph >> normalBorderStyle [
 	^ BorderStyle simple
 		width: 0;
 		baseColor: Color transparent
 ]
 
-{ #category : #style }
-ITToolbarItemButtonMorph >> normalFillStyle [
+{ #category : #accessing }
+ITButtonMorph >> normalFillStyle [
 	^ Color transparent
 ]
