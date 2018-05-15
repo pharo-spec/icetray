@@ -5,8 +5,8 @@ Class {
 		'label',
 		'icon',
 		'action',
-		'help',
-		'badge'
+		'badge',
+		'help'
 	],
 	#category : #'Icetray-items'
 }

@@ -1,7 +1,7 @@
 Class {
 	#name : #ITItemPositionLeft,
 	#superclass : #ITItemPosition,
-	#category : #'Icetray-Core'
+	#category : #'Icetray-Layouting'
 }
 
 { #category : #accessing }

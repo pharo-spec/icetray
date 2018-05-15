@@ -103,14 +103,20 @@ ITToolbar >> newToolbarItemFont [
 ITToolbar >> rebuildLeftPanel [
 	
 	self leftPanel removeAllMorphs.
-	leftItems do: [ :each | leftPanel addMorphBack: (each buildMorphOnToolbar: self) ]
+	leftItems do: [ :each | 
+		leftPanel addMorphBack: ((each buildMorphOnToolbar: self)
+			vResizing: #spaceFill;
+			yourself) ]
 ]
 
 { #category : #accessing }
 ITToolbar >> rebuildRightPanel [
 	
 	self rightPanel removeAllMorphs.
-	rightItems do: [ :each | rightPanel addMorphBack: (each buildMorphOnToolbar: self) ]
+	rightItems do: [ :each | 
+		rightPanel addMorphBack: ((each buildMorphOnToolbar: self)
+			vResizing: #spaceFill;
+			yourself) ]
 ]
 
 { #category : #accessing }
