@@ -33,6 +33,12 @@ ITComponentDecorator >> decoree: aPresenter [
 ]
 
 { #category : #initialization }
+ITComponentDecorator >> initialExtent [
+
+	^ decoree initialExtent
+]
+
+{ #category : #initialization }
 ITComponentDecorator >> initializeWidgets [
 	
 	toolbar := self instantiate: ITToolBar.
