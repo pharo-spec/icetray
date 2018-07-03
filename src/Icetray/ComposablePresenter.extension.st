@@ -20,3 +20,20 @@ ComposablePresenter >> newFastTreeTable [
 		vResizing: #spaceFill;
 		asSpecAdapter
 ]
+
+{ #category : #'*Icetray' }
+ComposablePresenter >> newPanel [
+	^ PanelMorph new 
+		changeTableLayout;
+		hResizing: #spaceFill;
+		vResizing: #spaceFill;
+		asSpecAdapter
+]
+
+{ #category : #'*Icetray' }
+ComposablePresenter >> newReadOnlyText [ 
+	^ ITReadOnlyTextMorph new
+		hResizing: #spaceFill;
+		vResizing: #spaceFill;
+		asSpecAdapter
+]

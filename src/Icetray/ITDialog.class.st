@@ -1,0 +1,49 @@
+"
+I am a basic spec dialog with an ok/cancel button.
+I'm an abstract class, check my subclasses.
+"
+Class {
+	#name : #ITDialog,
+	#superclass : #ComposablePresenter,
+	#instVars : [
+		'acceptButton',
+		'cancelButton'
+	],
+	#category : #'Icetray-Dialog'
+}
+
+{ #category : #testing }
+ITDialog class >> isAbstract [
+
+	^ ITDialog == self
+]
+
+{ #category : #actions }
+ITDialog >> accept [
+	"override this if you want a dialog"
+]
+
+{ #category : #accessing }
+ITDialog >> initializeDialogWindow: aWindow [
+	
+	acceptButton := aWindow toolbar okButton.
+	cancelButton := aWindow toolbar cancelButton.
+]
+
+{ #category : #accessing }
+ITDialog >> openDialogWithSpec [
+	^ super openDialogWithSpec
+		okAction: [ self accept ];
+		yourself
+]
+
+{ #category : #private }
+ITDialog >> withAssertHandlingDo: aBlock [
+	^ aBlock 
+		on: AssertionFailure 
+		do: [ :e | 
+			UIManager default 
+				alert: e messageText
+				title: 'Error: ', self title .
+			^ false ]
+]
