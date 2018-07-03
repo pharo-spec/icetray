@@ -1,21 +1,20 @@
 Class {
-	#name : #ITPropertyBasedColumn,
+	#name : #ITTableColumn,
 	#superclass : #FTColumn,
 	#instVars : [
 		'action',
-		'icon',
-		'alignment'
+		'icon'
 	],
 	#category : #'Icetray-FastTable'
 }
 
 { #category : #'instance creation' }
-ITPropertyBasedColumn class >> newAction: aSymbol [
+ITTableColumn class >> newAction: aSymbol [
 	^ self new action: aSymbol
 ]
 
 { #category : #'instance creation' }
-ITPropertyBasedColumn class >> newAction: aSymbolOrBlock icon: iconSymbolOrBlock [
+ITTableColumn class >> newAction: aSymbolOrBlock icon: iconSymbolOrBlock [
 	^ self new 
 		action: aSymbolOrBlock;
 		icon: iconSymbolOrBlock;
@@ -23,52 +22,27 @@ ITPropertyBasedColumn class >> newAction: aSymbolOrBlock icon: iconSymbolOrBlock
 ]
 
 { #category : #accessing }
-ITPropertyBasedColumn >> action [
+ITTableColumn >> action [
 	^ action
 ]
 
 { #category : #accessing }
-ITPropertyBasedColumn >> action: aSymbolOrBlock [
+ITTableColumn >> action: aSymbolOrBlock [
 	action := aSymbolOrBlock
 ]
 
 { #category : #accessing }
-ITPropertyBasedColumn >> alignment [
-	^ alignment
-]
-
-{ #category : #accessing }
-ITPropertyBasedColumn >> alignment: aSymbol [
-	"One of #center, #left or #right"
-	
-	alignment := aSymbol
-]
-
-{ #category : #accessing }
-ITPropertyBasedColumn >> execute [
-
-	1halt.
-]
-
-{ #category : #accessing }
-ITPropertyBasedColumn >> icon [
+ITTableColumn >> icon [
 	^ icon
 ]
 
 { #category : #accessing }
-ITPropertyBasedColumn >> icon: aSymbolOrBlock [
+ITTableColumn >> icon: aSymbolOrBlock [
 	icon := aSymbolOrBlock
 ]
 
-{ #category : #accessing }
-ITPropertyBasedColumn >> initialize [
-
-	super initialize.
-	alignment := #left
-]
-
 { #category : #factory }
-ITPropertyBasedColumn >> newHeader [
+ITTableColumn >> newHeader [
 	^ SimpleButtonMorph new
 		layoutPolicy: RowLayout new; 
 		listDirection: #leftToRight; 
@@ -82,12 +56,12 @@ ITPropertyBasedColumn >> newHeader [
 ]
 
 { #category : #accessing }
-ITPropertyBasedColumn >> read: anObject [
+ITTableColumn >> read: anObject [
 	^ self action value: anObject
 ]
 
 { #category : #accessing }
-ITPropertyBasedColumn >> readIcon: anObject [
+ITTableColumn >> readIcon: anObject [
 	^ self icon 
 		ifNotNil: [ self icon value: anObject ]
 ]

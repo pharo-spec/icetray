@@ -33,16 +33,9 @@ ITOptionDialog class >> defaultSpec [
 
 { #category : #actions }
 ITOptionDialog >> accept [
-	^ [[ self doAccept.
-	true ]	on: IceError , IceWarning
-		do: [ :e | e acceptError: (IceTipInteractiveErrorVisitor new). false ] ]
-		on: AssertionFailure
-		do: [ :e | 
-			UIManager default
-				alert: e messageText
-				title: ('{1}: Error' format: {self selectedType title}).
-			false ] 
-	
+	^ [ self doAccept ]
+		on: Error
+		do: [ :e | (ITErrorDialog on: e) openWithSpec ]
 ]
 
 { #category : #accessing }
@@ -105,7 +98,7 @@ ITOptionDialog >> initialExtent [
 { #category : #initialization }
 ITOptionDialog >> initializeTypeList [
 	typeList widget 
-		addColumn: (IceTipTableColumn newAction: #title icon: #icon);
+		addColumn: (ITTableColumn newAction: #title icon: #icon);
 		dataSource: self newTypeListDataSource;
 		onAnnouncement: FTSelectionChanged send: #selectionChanged: to: self.
 ]
@@ -113,7 +106,7 @@ ITOptionDialog >> initializeTypeList [
 { #category : #initialization }
 ITOptionDialog >> initializeWidgets [
 	contentPanel := self emptyPanel asSpecAdapter.
-	typeList := self newIceTable.
+	typeList := self newFastTable.
 	self initializeTypeList.
 			
 	self whenBuiltDo: [ :ann |
@@ -129,18 +122,12 @@ ITOptionDialog >> initializeWidgets [
 
 { #category : #'private factory' }
 ITOptionDialog >> newTypeListDataSource [
-	^ IceTipDataSource new 
-		tool: self;
+
+	^ FTEasyListDataSource new 
 		elements: self allTypes;
-		yourself.
-		
-	"^ IceTipTreeOutlineDataSource new 
-		tool: self;
-		rootForItems: self allTypes;
-		childrenBlock: [ :each | #() ];
-		format: [ :each | each title ];
+		display: [ :each | each title ];
 		icon: [ :each | each icon ];
-		yourself"
+		yourself
 ]
 
 { #category : #focus }

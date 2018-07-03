@@ -9,5 +9,5 @@ Class {
 
 { #category : #'meta-data - dependency analyser' }
 ManifestIcetray class >> manuallyResolvedDependencies [
-	^ #(#'Spec-MorphicAdapters' #'Polymorph-Widgets' #'Collections-Abstract' #'Graphics-Canvas' #'Morphic-Widgets-Pluggable')
+	^ #(#'Spec-MorphicAdapters' #'Random-Core' #'Polymorph-Widgets' #'Collections-Abstract' #'Graphics-Canvas' #'Morphic-Widgets-Pluggable')
 ]
