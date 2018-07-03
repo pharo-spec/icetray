@@ -117,7 +117,6 @@ ITOptionDialog >> initializeWidgets [
 	self initializeTypeList.
 			
 	self whenBuiltDo: [ :ann |
-		self addShortcutsTo: ann widget.
 		self selectFirst ].
 
 	self eventKeyStrokesForNextFocus do: [:each |

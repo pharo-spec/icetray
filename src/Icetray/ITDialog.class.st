@@ -23,6 +23,12 @@ ITDialog >> accept [
 	"override this if you want a dialog"
 ]
 
+{ #category : #actions }
+ITDialog >> basicOpenWithSpec [
+
+	super openWithSpec
+]
+
 { #category : #accessing }
 ITDialog >> initializeDialogWindow: aWindow [
 	
@@ -30,11 +36,17 @@ ITDialog >> initializeDialogWindow: aWindow [
 	cancelButton := aWindow toolbar cancelButton.
 ]
 
-{ #category : #accessing }
+{ #category : #api }
 ITDialog >> openDialogWithSpec [
 	^ super openDialogWithSpec
 		okAction: [ self accept ];
 		yourself
+]
+
+{ #category : #api }
+ITDialog >> openWithSpec [
+
+	self openDialogWithSpec
 ]
 
 { #category : #private }
