@@ -114,5 +114,11 @@ BaselineOfIcetray >> baseline: spec [
 						loads: #('Core' 'AllActivators' 'Commander-SpecSupport') ].
 			spec
 				package: #Icetray;
-				package: #'Icetray-Commander' with: [ spec requires: #('Icetray' 'Commander') ] ]
+				package: #'Icetray-Commander' with: [ spec requires: #('Icetray' 'Commander') ] ].
+	spec
+		for: #'pharo6.x'
+		do: [ spec
+				baseline: 'Spec70Compatibility'
+				with: [ spec repository: 'github://pharo-contributions/Spec70Compatibility:v1.0.0/src' ].
+			spec package: 'Icetray' with: [ spec requires: #('Spec70Compatibility') ] ]
 ]
