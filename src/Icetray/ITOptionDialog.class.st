@@ -13,9 +13,13 @@ Class {
 	#name : #ITOptionDialog,
 	#superclass : #ITDialog,
 	#instVars : [
+		'title',
 		'typeList',
 		'type',
-		'contentPanel'
+		'contentPanel',
+		'panels',
+		'acceptCallback',
+		'cancelCallback'
 	],
 	#category : #'Icetray-Dialog'
 }
@@ -36,11 +40,6 @@ ITOptionDialog >> accept [
 	^ [ self doAccept ]
 		on: Error
 		do: [ :e | (ITErrorDialog on: e) openWithSpec ]
-]
-
-{ #category : #accessing }
-ITOptionDialog >> allTypes [
-	^ self subclassResponsibility
 ]
 
 { #category : #private }
@@ -72,7 +71,8 @@ ITOptionDialog >> contextSelection [
 
 { #category : #actions }
 ITOptionDialog >> doAccept [
-	self subclassResponsibility
+
+	acceptCallback cull: self selectedType
 ]
 
 { #category : #private }
@@ -124,10 +124,28 @@ ITOptionDialog >> initializeWidgets [
 ITOptionDialog >> newTypeListDataSource [
 
 	^ FTEasyListDataSource new 
-		elements: self allTypes;
+		elements: self panels;
 		display: [ :each | each title ];
 		icon: [ :each | each icon ];
 		yourself
+]
+
+{ #category : #opening }
+ITOptionDialog >> openDialogOnAccept: anAcceptCallback onCancel: aCancelCallback [
+	
+	acceptCallback := anAcceptCallback.
+	cancelCallback := aCancelCallback.
+	self openDialogWithSpec
+]
+
+{ #category : #accessing }
+ITOptionDialog >> panels [
+	^ panels
+]
+
+{ #category : #accessing }
+ITOptionDialog >> panels: anObject [
+	panels := anObject
 ]
 
 { #category : #focus }
@@ -173,7 +191,7 @@ ITOptionDialog >> replacePanelWith: aType [
 { #category : #private }
 ITOptionDialog >> selectFirst [
 	typeList widget selectRowIndex: 1.
-	self basicSelectionChanged: self allTypes first 	
+	self basicSelectionChanged: self panels first 	
 ]
 
 { #category : #accessing }

@@ -14,19 +14,16 @@ ITExampleOptionDialog class >> openExample [
 ]
 
 { #category : #accessing }
-ITExampleOptionDialog >> allTypes [
-	^ {(ITExampleOptionPanel basicNew
+ITExampleOptionDialog >> initialize [	
+	panels := {(ITExampleOptionPanel basicNew
 		title: 'First';
 		icon: Smalltalk ui icons icons atRandom;
 		initialize).
 	(ITExampleOptionPanel basicNew
 		title: 'Second';
 		icon: Smalltalk ui icons icons atRandom;
-		initialize)}
-]
-
-{ #category : #actions }
-ITExampleOptionDialog >> doAccept [
-	
-	self inform: 'You selected ', self selectedType title
+		initialize)}.
+		
+	acceptCallback := [ :selectedType | self inform: 'You selected ', selectedType title ].
+	super initialize.
 ]
