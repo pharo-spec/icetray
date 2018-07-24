@@ -1,10 +1,13 @@
+"
+A group of option buttons
+"
 Class {
 	#name : #ITOptionButtonGroup,
 	#superclass : #ITItem,
 	#instVars : [
 		'options'
 	],
-	#category : #'Icetray-items'
+	#category : #'Icetray-Items'
 }
 
 { #category : #accessing }

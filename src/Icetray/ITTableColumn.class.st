@@ -1,3 +1,6 @@
+"
+A table column representing a given action and using a given icon
+"
 Class {
 	#name : #ITTableColumn,
 	#superclass : #FTColumn,

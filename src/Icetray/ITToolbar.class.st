@@ -1,3 +1,6 @@
+"
+A toolbar
+"
 Class {
 	#name : #ITToolBar,
 	#superclass : #ComposablePresenter,

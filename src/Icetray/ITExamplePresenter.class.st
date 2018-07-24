@@ -1,5 +1,5 @@
 "
-I show how to implement a presenter with a toolbar and a footbar.
+I show how to implement a presenter with a toolbar and a status bar at the bottom.
 "
 Class {
 	#name : #ITExamplePresenter,
@@ -15,7 +15,7 @@ ITExamplePresenter class >> defaultSpec [
 			newColumn: [ :column | ]
 ]
 
-{ #category : #specs }
+{ #category : #examples }
 ITExamplePresenter class >> openExample [
 	<example>
 	self new openWithSpec

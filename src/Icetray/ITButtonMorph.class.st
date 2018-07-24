@@ -1,3 +1,6 @@
+"
+A button morph typically used on a toolbar. The button can have a badge.
+"
 Class {
 	#name : #ITButtonMorph,
 	#superclass : #PluggableButtonMorph,

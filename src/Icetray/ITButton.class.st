@@ -1,3 +1,6 @@
+"
+A button with an icon and label associated with an action and a badge 
+"
 Class {
 	#name : #ITButton,
 	#superclass : #ITItem,
@@ -8,7 +11,7 @@ Class {
 		'badge',
 		'help'
 	],
-	#category : #'Icetray-items'
+	#category : #'Icetray-Items'
 }
 
 { #category : #accessing }

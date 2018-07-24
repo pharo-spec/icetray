@@ -1,10 +1,13 @@
+"
+A toggle button which is either selected or unselected
+"
 Class {
 	#name : #ITToggleButton,
 	#superclass : #ITButton,
 	#instVars : [
 		'selected'
 	],
-	#category : #'Icetray-items'
+	#category : #'Icetray-Items'
 }
 
 { #category : #selection }
