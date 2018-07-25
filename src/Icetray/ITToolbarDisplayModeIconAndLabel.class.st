@@ -1,3 +1,6 @@
+"
+Display the toolbar with icons and label only
+"
 Class {
 	#name : #ITToolbarDisplayModeIconAndLabel,
 	#superclass : #ITToolbarDisplayMode,

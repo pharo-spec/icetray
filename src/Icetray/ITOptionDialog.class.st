@@ -35,6 +35,12 @@ ITOptionDialog class >> defaultSpec [
 				newColumn: #contentPanel ]
 ]
 
+{ #category : #testing }
+ITOptionDialog class >> isAbstract [
+
+	^ ITOptionDialog == self
+]
+
 { #category : #actions }
 ITOptionDialog >> accept [
 	^ [ self doAccept ]

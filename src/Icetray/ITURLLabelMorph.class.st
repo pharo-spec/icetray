@@ -1,3 +1,7 @@
+"
+An URL like label morph where it is possible to click and execute an action block 
+(to open a webbrowser or other)
+"
 Class {
 	#name : #ITURLLabelMorph,
 	#superclass : #LabelMorph,

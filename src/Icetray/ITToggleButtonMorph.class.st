@@ -1,3 +1,6 @@
+"
+A toggle button morph
+"
 Class {
 	#name : #ITToggleButtonMorph,
 	#superclass : #PluggableToggleButtonMorph,

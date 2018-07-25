@@ -13,17 +13,17 @@ ITExampleOptionDialog class >> openExample [
 	self new openWithSpec
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 ITExampleOptionDialog >> initialize [	
 	panels := {(ITExampleOptionPanel basicNew
-		title: 'First';
-		icon: Smalltalk ui icons icons atRandom;
+		title: 'First' translated;
+		icon: (self iconNamed: #thumbsUp);
 		initialize).
 	(ITExampleOptionPanel basicNew
-		title: 'Second';
-		icon: Smalltalk ui icons icons atRandom;
+		title: 'Second' translated;
+		icon: (self iconNamed: #thumbsDown);
 		initialize)}.
 		
 	acceptCallback := [ :selectedType | self inform: 'You selected ', selectedType title ].
-	super initialize.
+	super initialize
 ]

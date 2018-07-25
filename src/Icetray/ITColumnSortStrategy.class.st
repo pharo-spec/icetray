@@ -1,3 +1,6 @@
+"
+A sort strategy for a table column either in ascending or descending sort order
+"
 Class {
 	#name : #ITColumnSortStrategy,
 	#superclass : #Object,
@@ -17,10 +20,16 @@ ITColumnSortStrategy class >> property: aString [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #reordering }
 ITColumnSortStrategy >> beAscending [
 	
 	direction := #ascending
+]
+
+{ #category : #reordering }
+ITColumnSortStrategy >> beDescending [
+	
+	direction := #descending
 ]
 
 { #category : #accessing }
@@ -40,6 +49,12 @@ ITColumnSortStrategy >> directionArrowCharacter [
 ITColumnSortStrategy >> isAscending [
 	
 	^ direction = #ascending
+]
+
+{ #category : #testing }
+ITColumnSortStrategy >> isDescending [
+	
+	^ direction = #descending
 ]
 
 { #category : #accessing }

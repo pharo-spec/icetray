@@ -1,3 +1,6 @@
+"
+A component decorator used to decorate a decoree with a toolbar and a status bar
+"
 Class {
 	#name : #ITComponentDecorator,
 	#superclass : #ComposablePresenter,
