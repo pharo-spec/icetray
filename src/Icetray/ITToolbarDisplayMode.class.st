@@ -1,3 +1,6 @@
+"
+Abstract superclass for different display modes for a toolbar
+"
 Class {
 	#name : #ITToolbarDisplayMode,
 	#superclass : #Object,

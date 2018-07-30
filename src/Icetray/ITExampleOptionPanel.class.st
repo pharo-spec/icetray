@@ -1,5 +1,7 @@
 "
-I'm an example of an option panel made to be used in the ITExampleOptionDialog.
+openExample
+	<example>
+	self new openWithSpec
 "
 Class {
 	#name : #ITExampleOptionPanel,

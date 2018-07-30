@@ -1,10 +1,13 @@
+"
+An option button
+"
 Class {
 	#name : #ITOptionButton,
 	#superclass : #ITToggleButton,
 	#instVars : [
 		'buttonGroup'
 	],
-	#category : #'Icetray-items'
+	#category : #'Icetray-Items'
 }
 
 { #category : #accessing }

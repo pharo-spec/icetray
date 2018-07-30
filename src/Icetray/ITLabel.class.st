@@ -1,3 +1,6 @@
+"
+A label
+"
 Class {
 	#name : #ITLabel,
 	#superclass : #ITItem,
@@ -5,7 +8,7 @@ Class {
 		'help',
 		'contents'
 	],
-	#category : #'Icetray-items'
+	#category : #'Icetray-Items'
 }
 
 { #category : #factory }
