@@ -121,6 +121,11 @@ ITForm >> valueNamed: aFieldName [
 		ifFound: [ :aField | ^ aField fieldValue ]
 ]
 
+{ #category : #'API - fields' }
+ITForm >> valueNamed: aName set: aValue [
+	fields detect: [ :each | each name = aName ] ifFound: [ :aField | aField fieldValue: aValue ]
+]
+
 { #category : #'accessing-widgets' }
 ITForm >> widgetAt: aName put: aWidget [ 
 

@@ -101,6 +101,12 @@ ITFormTextField >> fieldValue [
 ]
 
 { #category : #accessing }
+ITFormTextField >> fieldValue: aString [ 
+	
+	self text: aString
+]
+
+{ #category : #accessing }
 ITFormTextField >> ghostText: aString [ 
 	field ghostText: aString
 ]
