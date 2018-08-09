@@ -33,7 +33,7 @@ ITForm >> addTextField: fieldName label: labelString ghost: ghostString initialV
 
 	| field |
 
-	field := self instantiate: ITFormTextField.
+	field := self instantiate: ITTextField.
 	field 
 		name: fieldName;
 		label: labelString;
@@ -117,7 +117,6 @@ ITForm >> rebuildLayout [
 	].
 
 	self layout: spec.
-	self validate
 ]
 
 { #category : #'API - validations' }

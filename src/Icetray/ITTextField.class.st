@@ -1,5 +1,5 @@
 Class {
-	#name : #ITFormTextField,
+	#name : #ITTextField,
 	#superclass : #ComposablePresenter,
 	#instVars : [
 		'errorIcon',
@@ -13,13 +13,13 @@ Class {
 }
 
 { #category : #specs }
-ITFormTextField class >> defaultSpec [
+ITTextField class >> defaultSpec [
 	
 	^ self horizontal
 ]
 
 { #category : #specs }
-ITFormTextField class >> example [
+ITTextField class >> example [
 	<example>
 	
 	self new
@@ -30,7 +30,7 @@ ITFormTextField class >> example [
 ]
 
 { #category : #specs }
-ITFormTextField class >> exampleVertical [
+ITTextField class >> exampleVertical [
 	<example>
 	
 	self new
@@ -41,7 +41,7 @@ ITFormTextField class >> exampleVertical [
 ]
 
 { #category : #specs }
-ITFormTextField class >> horizontal [
+ITTextField class >> horizontal [
 	<spec: #horizontal>
 	
 	^ SpecLayout composed
@@ -53,7 +53,7 @@ ITFormTextField class >> horizontal [
 ]
 
 { #category : #specs }
-ITFormTextField class >> vertical [
+ITTextField class >> vertical [
 	<spec: #vertical>
 	
 	^ SpecLayout composed
@@ -65,29 +65,29 @@ ITFormTextField class >> vertical [
 ]
 
 { #category : #'API - validations' }
-ITFormTextField >> addValidationError: aValidation [ 
+ITTextField >> addValidationError: aValidation [ 
 
 	validationErrors add: aValidation
 ]
 
 { #category : #'API - configuration' }
-ITFormTextField >> beReadOnly [
+ITTextField >> beReadOnly [
 
 	fieldWidget enabled: false
 ]
 
 { #category : #'API - validations' }
-ITFormTextField >> beRequired [
+ITTextField >> beRequired [
 	validations add: ITRequiredFieldValidation new
 ]
 
 { #category : #accessing }
-ITFormTextField >> errorIcon [
+ITTextField >> errorIcon [
 	^ errorIcon
 ]
 
 { #category : #updating }
-ITFormTextField >> errorIconMessage [
+ITTextField >> errorIconMessage [
 
 	^ String streamContents: [ :stream |
 			validationErrors 
@@ -96,29 +96,29 @@ ITFormTextField >> errorIconMessage [
 ]
 
 { #category : #accessing }
-ITFormTextField >> fieldValue [
+ITTextField >> fieldValue [
 	
 	^ self text
 ]
 
 { #category : #accessing }
-ITFormTextField >> fieldValue: aString [ 
+ITTextField >> fieldValue: aString [ 
 	
 	self text: aString
 ]
 
 { #category : #accessing }
-ITFormTextField >> fieldWidget [
+ITTextField >> fieldWidget [
 	^ fieldWidget
 ]
 
 { #category : #accessing }
-ITFormTextField >> ghostText: aString [ 
+ITTextField >> ghostText: aString [ 
 	fieldWidget ghostText: aString
 ]
 
 { #category : #initialization }
-ITFormTextField >> initialize [
+ITTextField >> initialize [
 	super initialize.
 	
 	validations := OrderedCollection new.
@@ -126,84 +126,89 @@ ITFormTextField >> initialize [
 ]
 
 { #category : #initialization }
-ITFormTextField >> initializeWidgets [
+ITTextField >> initializeWidgets [
 	
 	labelWidget := self newLabel.
 	fieldWidget := self newTextInput autoAccept: true.
 	errorIcon := self newPanel.
 
+	fieldWidget whenBuiltDo: [ self validate ]
 ]
 
 { #category : #'API - validations' }
-ITFormTextField >> isValid [
+ITTextField >> isValid [
 
 	^ validationErrors isEmpty
 ]
 
 { #category : #accessing }
-ITFormTextField >> label [
+ITTextField >> label [
 	^ labelWidget label
 ]
 
 { #category : #accessing }
-ITFormTextField >> label: aString [ 
+ITTextField >> label: aString [ 
 	labelWidget label: aString
 ]
 
 { #category : #accessing }
-ITFormTextField >> labelWidget [
+ITTextField >> labelWidget [
 	^ labelWidget
 ]
 
 { #category : #accessing }
-ITFormTextField >> name [
+ITTextField >> name [
 	^ name
 ]
 
 { #category : #accessing }
-ITFormTextField >> name: aString [ 
+ITTextField >> name: aString [ 
 	
 	name := aString
 ]
 
 { #category : #accessing }
-ITFormTextField >> text [
+ITTextField >> text [
 	^ fieldWidget text
 ]
 
 { #category : #accessing }
-ITFormTextField >> text: aString [ 
+ITTextField >> text: aString [ 
 	fieldWidget text: aString.
 
 ]
 
 { #category : #updating }
-ITFormTextField >> updateErrorIcon [
+ITTextField >> updateShowingError [
 	
 	| icon |
 	
 	errorIcon widget removeAllMorphs.
+	fieldWidget borderColor: nil.
 	
 	self isValid ifTrue: [ ^ self ].
 	
 	icon := (self iconNamed: #error) asMorph.
 	icon setBalloonText: self errorIconMessage.
-	errorIcon widget addMorph: icon
+	errorIcon widget addMorph: icon.
+		
+	fieldWidget borderColor: Color red.
+
 ]
 
 { #category : #'API - validations' }
-ITFormTextField >> validate [
+ITTextField >> validate [
 	
 	validationErrors := OrderedCollection new.
 	validations do: [ :each | each validate: self ].
 	
-	self updateErrorIcon.
+	self updateShowingError.
 	
 	^ self isValid
 ]
 
 { #category : #'API - events' }
-ITFormTextField >> whenChanged: aValuable [
+ITTextField >> whenChanged: aValuable [
 
 	fieldWidget whenTextChanged: aValuable
 ]
