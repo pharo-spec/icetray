@@ -3,7 +3,9 @@ Class {
 	#superclass : #DynamicComposablePresenter,
 	#instVars : [
 		'fields',
-		'validateOnChange'
+		'validateOnChange',
+		'hasValidation',
+		'isReadOnly'
 	],
 	#category : #'Icetray-Forms'
 }
@@ -44,6 +46,7 @@ ITForm >> addTextField: fieldName label: labelString ghost: ghostString initialV
 	fields add: field.
 	
 	field whenChanged: [ self fieldChanged: field ].
+	isReadOnly ifTrue: [ field beReadOnly ].
 	
 	self rebuildLayout.
 	
@@ -62,6 +65,13 @@ ITForm >> addTextField: fieldName label: labelString with: aBlock [
 	^ self addTextField: fieldName label: labelString ghost: '' initialValue: '' with: aBlock
 ]
 
+{ #category : #'API - configuration' }
+ITForm >> beReadOnly [
+
+	isReadOnly := true.
+	fields do: [ :f | f beReadOnly ]
+]
+
 { #category : #private }
 ITForm >> fieldChanged: aField [
 
@@ -73,7 +83,9 @@ ITForm >> fieldChanged: aField [
 ITForm >> initialize [
 	super initialize.
 	fields := OrderedCollection new.
-	validateOnChange := false
+	validateOnChange := false.
+	hasValidation := true.
+	isReadOnly := false.
 ]
 
 { #category : #initialization }
@@ -87,7 +99,15 @@ ITForm >> isValid [
 ]
 
 { #category : #private }
+ITForm >> rebuildFocusOrder [
+
+	self focusOrder: (fields collect: [ :aField | aField fieldWidget ] ).
+]
+
+{ #category : #private }
 ITForm >> rebuildLayout [
+
+	self rebuildFocusOrder.
 	
 	spec := SpecLayout composed.
 
@@ -102,6 +122,8 @@ ITForm >> rebuildLayout [
 
 { #category : #'API - validations' }
 ITForm >> validate [
+	
+	hasValidation ifFalse: [ ^ true ].
 	
 	fields do: [:each | each validate ].	
 	^ self isValid

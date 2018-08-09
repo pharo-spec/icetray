@@ -2,12 +2,12 @@ Class {
 	#name : #ITFormTextField,
 	#superclass : #ComposablePresenter,
 	#instVars : [
-		'label',
-		'field',
 		'errorIcon',
 		'validations',
 		'name',
-		'validationErrors'
+		'validationErrors',
+		'fieldWidget',
+		'labelWidget'
 	],
 	#category : #'Icetray-Forms'
 }
@@ -48,7 +48,7 @@ ITFormTextField class >> horizontal [
 		newRow: [ :row | 
 			row
 				add: #labelWidget width: self iceLabelWidth;
-				add: #field;
+				add: #fieldWidget;
 				add: #errorIcon width: 15]
 ]
 
@@ -60,7 +60,7 @@ ITFormTextField class >> vertical [
 		newColumn: [ :column | 
 			column
 				add: #labelWidget height: self inputTextHeight;
-				add: #field height: self inputTextHeight;
+				add: #fieldWidget height: self inputTextHeight;
 				add: #errorIcon height: self inputTextHeight]
 ]
 
@@ -68,6 +68,12 @@ ITFormTextField class >> vertical [
 ITFormTextField >> addValidationError: aValidation [ 
 
 	validationErrors add: aValidation
+]
+
+{ #category : #'API - configuration' }
+ITFormTextField >> beReadOnly [
+
+	fieldWidget enabled: false
 ]
 
 { #category : #'API - validations' }
@@ -90,11 +96,6 @@ ITFormTextField >> errorIconMessage [
 ]
 
 { #category : #accessing }
-ITFormTextField >> field [
-	^ field
-]
-
-{ #category : #accessing }
 ITFormTextField >> fieldValue [
 	
 	^ self text
@@ -107,8 +108,13 @@ ITFormTextField >> fieldValue: aString [
 ]
 
 { #category : #accessing }
+ITFormTextField >> fieldWidget [
+	^ fieldWidget
+]
+
+{ #category : #accessing }
 ITFormTextField >> ghostText: aString [ 
-	field ghostText: aString
+	fieldWidget ghostText: aString
 ]
 
 { #category : #initialization }
@@ -122,8 +128,8 @@ ITFormTextField >> initialize [
 { #category : #initialization }
 ITFormTextField >> initializeWidgets [
 	
-	label := self newLabel.
-	field := self newTextInput autoAccept: true.
+	labelWidget := self newLabel.
+	fieldWidget := self newTextInput autoAccept: true.
 	errorIcon := self newPanel.
 
 ]
@@ -136,17 +142,17 @@ ITFormTextField >> isValid [
 
 { #category : #accessing }
 ITFormTextField >> label [
-	^ label label
+	^ labelWidget label
 ]
 
 { #category : #accessing }
 ITFormTextField >> label: aString [ 
-	label label: aString
+	labelWidget label: aString
 ]
 
 { #category : #accessing }
 ITFormTextField >> labelWidget [
-	^ label
+	^ labelWidget
 ]
 
 { #category : #accessing }
@@ -162,12 +168,12 @@ ITFormTextField >> name: aString [
 
 { #category : #accessing }
 ITFormTextField >> text [
-	^ field text
+	^ fieldWidget text
 ]
 
 { #category : #accessing }
 ITFormTextField >> text: aString [ 
-	field text: aString.
+	fieldWidget text: aString.
 
 ]
 
@@ -199,5 +205,5 @@ ITFormTextField >> validate [
 { #category : #'API - events' }
 ITFormTextField >> whenChanged: aValuable [
 
-	field whenTextChanged: aValuable
+	fieldWidget whenTextChanged: aValuable
 ]
