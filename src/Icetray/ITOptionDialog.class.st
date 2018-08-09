@@ -136,6 +136,12 @@ ITOptionDialog >> newTypeListDataSource [
 		yourself
 ]
 
+{ #category : #'accessing ui' }
+ITOptionDialog >> okEnabled: aValue [
+	
+	self window toolbar okButton enabled: aValue
+]
+
 { #category : #opening }
 ITOptionDialog >> openDialogOnAccept: anAcceptCallback onCancel: aCancelCallback [
 	
