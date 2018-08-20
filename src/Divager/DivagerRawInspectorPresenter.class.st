@@ -1,5 +1,5 @@
 Class {
-	#name : #DivagerRawInspector,
+	#name : #DivagerRawInspectorPresenter,
 	#superclass : #ComposablePresenter,
 	#instVars : [
 		'object',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #specs }
-DivagerRawInspector class >> defaultSpec [
+DivagerRawInspectorPresenter class >> defaultSpec [
 	<spec: #default>
 	^ SpecLayout composed
 		newColumn: [ :col | 
@@ -17,12 +17,12 @@ DivagerRawInspector class >> defaultSpec [
 ]
 
 { #category : #accessing }
-DivagerRawInspector >> fastTable [
+DivagerRawInspectorPresenter >> fastTable [
 	^ fastTable
 ]
 
 { #category : #initialization }
-DivagerRawInspector >> initializeWidgets [
+DivagerRawInspectorPresenter >> initializeWidgets [
 	
 	fastTable := self newFastTable.
 	fastTable widget 
@@ -32,19 +32,19 @@ DivagerRawInspector >> initializeWidgets [
 ]
 
 { #category : #accessing }
-DivagerRawInspector >> selection [
+DivagerRawInspectorPresenter >> selection [
 	
 	^ fastTable widget dataSource elementAt: (fastTable widget selectedRowIndex)
 ]
 
 { #category : #'model access' }
-DivagerRawInspector >> setModelBeforeInitialization: anObject [
+DivagerRawInspectorPresenter >> setModelBeforeInitialization: anObject [
 
 	object := anObject
 ]
 
 { #category : #selection }
-DivagerRawInspector >> whenSelectionChanged: aBlockClosure [
+DivagerRawInspectorPresenter >> whenSelectionChanged: aBlockClosure [
 	
 	fastTable widget onAnnouncement: FTSelectionChanged send: #value to: aBlockClosure
 ]

@@ -19,20 +19,21 @@ DivagerPresenter class >> defaultSpec [
 
 { #category : #adding }
 DivagerPresenter >> addPane: aSpecPresenter [
-
 	| newPaneId |
 	newPaneId := ('pane' , (panes size + 1) asString) asSymbol.
-	panes add: (DivagerPane new
-		presenter: aSpecPresenter;
-		id: newPaneId;
-		yourself).
-	widgets at: newPaneId put: aSpecPresenter.	
+	panes
+		add:
+			(DivagerPane new
+				presenter: aSpecPresenter;
+				id: newPaneId;
+				yourself).
+	widgets at: newPaneId put: aSpecPresenter.
 	firstPane := self calculateFirstPane.
-
-	aSpecPresenter whenSelectionChanged: [
-		panes := panes copyUpThrough: (panes detect: [ :any | any hasPresenter: aSpecPresenter ]).
-		self addPane: (self newTransitionTo: aSpecPresenter selection) ].
-
+	aSpecPresenter
+		whenSelectionChanged: [ panes := panes
+				copyUpThrough: (panes detect: [ :any | any hasPresenter: aSpecPresenter ]).
+			aSpecPresenter selection
+				ifNotNil: [ :selectedObject | self addPane: (self newTransitionTo: selectedObject) ] ].
 	self valueChanged.
 	self refresh
 ]

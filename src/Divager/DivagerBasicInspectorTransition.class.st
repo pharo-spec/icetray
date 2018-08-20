@@ -7,5 +7,5 @@ Class {
 { #category : #transition }
 DivagerBasicInspectorTransition >> transitionTo: anObject in: aPresenter [
 	
-	^ aPresenter instantiate: DivagerRawInspector on: anObject
+	^ aPresenter instantiate: DivagerRawInspectorPresenter on: anObject
 ]
