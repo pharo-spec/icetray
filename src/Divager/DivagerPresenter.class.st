@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'panes',
 		'firstPane',
-		'maxPanesToShow'
+		'maxPanesToShow',
+		'transition'
 	],
 	#category : #Divager
 }
@@ -28,8 +29,9 @@ DivagerPresenter >> addPane: aSpecPresenter [
 	widgets at: newPaneId put: aSpecPresenter.	
 	firstPane := (panes size - maxPanesToShow + 1) max: 1.
 
-	aSpecPresenter whenSelectionChanged: [ 
-		self addPane: (self instantiate: DivagerRawInspector on: aSpecPresenter selection) ].
+	aSpecPresenter whenSelectionChanged: [
+		panes := panes copyUpTo: aSpecPresenter.
+		self addPane: (self newTransitionTo: aSpecPresenter selection) ].
 
 	self valueChanged.
 	self refresh
@@ -109,6 +111,12 @@ DivagerPresenter >> newLayout [
 	^ SpecLayout composed 
 ]
 
+{ #category : #adding }
+DivagerPresenter >> newTransitionTo: anObject [
+
+	^ transition transitionTo: anObject in: self
+]
+
 { #category : #accessing }
 DivagerPresenter >> pageCount [
 	
@@ -121,4 +129,10 @@ DivagerPresenter >> refresh [
 	self layout newRow: [ :row | self addWidgetsTo: row ].
 	self needFullRebuild: false.
 	self buildWithSpecLayout: self layout
+]
+
+{ #category : #adding }
+DivagerPresenter >> setModelBeforeInitialization: anObject [
+
+	transition := anObject
 ]

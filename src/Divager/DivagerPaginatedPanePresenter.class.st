@@ -4,32 +4,54 @@ Class {
 	#instVars : [
 		'panesPresenter',
 		'quantityPresenter',
-		'object'
+		'transition',
+		'initialObject'
 	],
 	#category : #Divager
 }
 
 { #category : #specs }
 DivagerPaginatedPanePresenter class >> defaultSpec [
-<spec>
-
-	^SpecLayout composed
-		newColumn: [:column |
-			column 
+	<spec>
+	^ SpecLayout composed
+		newColumn: [ :column | 
+			column
 				add: #panesPresenter;
-				newRow: [ :row |
+				newRow: [ :row | 
 					row
-						newColumn: [ :empty ];
+						newColumn: [ :empty |  ];
 						add: #quantityPresenter width: 150;
-						newColumn: [ :empty ] ]
-				height: 30 ]
+						newColumn: [ :empty |  ] ]
+					height: 30 ]
+]
+
+{ #category : #specs }
+DivagerPaginatedPanePresenter class >> transition: aTransition on: anInitialObject [
+
+	^ self basicNew
+		initializeTransition: aTransition initialObject: anInitialObject;
+		initialize;
+		yourself
+]
+
+{ #category : #initialization }
+DivagerPaginatedPanePresenter >> firstPane [
+
+	^ transition transitionTo: initialObject in: self
+]
+
+{ #category : #initialization }
+DivagerPaginatedPanePresenter >> initializeTransition: aTransition initialObject: anObject [
+
+	initialObject := anObject.
+	transition := aTransition.
 ]
 
 { #category : #initialization }
 DivagerPaginatedPanePresenter >> initializeWidgets [
 	
-	panesPresenter := self instantiate: DivagerPresenter.
-	panesPresenter addPane: (self instantiate: DivagerRawInspector on: object).
+	panesPresenter := self instantiate: DivagerPresenter on: transition.
+	panesPresenter addPane: self firstPane.
 	quantityPresenter := self instantiate: DivagerTestPaginatorPresenter on: panesPresenter.
 ]
 
@@ -51,10 +73,4 @@ DivagerPaginatedPanePresenter >> quantityPresenter [
 { #category : #accessing }
 DivagerPaginatedPanePresenter >> quantityPresenter: anObject [
 	quantityPresenter := anObject
-]
-
-{ #category : #initialization }
-DivagerPaginatedPanePresenter >> setModelBeforeInitialization: anObject [
-
-	object := anObject
 ]
