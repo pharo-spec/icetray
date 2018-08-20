@@ -17,15 +17,6 @@ DivagerPresenter class >> defaultSpec [
 ]
 
 { #category : #adding }
-DivagerPresenter >> addButton [
-
-	self addPane: (self newButton
-		label: 'click me' ,  (panes size + 1) asString;
-		action: [ self addButton ];
-		yourself).
-]
-
-{ #category : #adding }
 DivagerPresenter >> addPane: aSpecPresenter [
 
 	| newPaneId |
@@ -34,9 +25,11 @@ DivagerPresenter >> addPane: aSpecPresenter [
 		presenter: aSpecPresenter;
 		id: newPaneId;
 		yourself).
-	widgets at: newPaneId put: aSpecPresenter.
-	
+	widgets at: newPaneId put: aSpecPresenter.	
 	firstPane := (panes size - maxPanesToShow + 1) max: 1.
+
+	aSpecPresenter whenSelectionChanged: [ 
+		self addPane: (self instantiate: DivagerRawInspector on: aSpecPresenter selection) ].
 
 	self valueChanged.
 	self refresh
@@ -93,14 +86,6 @@ DivagerPresenter >> initialize [
 	firstPane := 1.
 	panes := OrderedCollection new.
 	super initialize.
-]
-
-{ #category : #adding }
-DivagerPresenter >> initializeWidgets [
-
-	self
-		addButton;
-		addTabPresenter
 ]
 
 { #category : #adding }

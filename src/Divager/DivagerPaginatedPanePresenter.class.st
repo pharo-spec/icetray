@@ -1,15 +1,16 @@
 Class {
-	#name : #DivagerInspector,
+	#name : #DivagerPaginatedPanePresenter,
 	#superclass : #ComposablePresenter,
 	#instVars : [
 		'panesPresenter',
-		'quantityPresenter'
+		'quantityPresenter',
+		'object'
 	],
 	#category : #Divager
 }
 
 { #category : #specs }
-DivagerInspector class >> defaultSpec [
+DivagerPaginatedPanePresenter class >> defaultSpec [
 <spec>
 
 	^SpecLayout composed
@@ -25,28 +26,35 @@ DivagerInspector class >> defaultSpec [
 ]
 
 { #category : #initialization }
-DivagerInspector >> initializeWidgets [
+DivagerPaginatedPanePresenter >> initializeWidgets [
 	
 	panesPresenter := self instantiate: DivagerPresenter.
+	panesPresenter addPane: (self instantiate: DivagerRawInspector on: object).
 	quantityPresenter := self instantiate: DivagerTestPaginatorPresenter on: panesPresenter.
 ]
 
 { #category : #accessing }
-DivagerInspector >> panesPresenter [
+DivagerPaginatedPanePresenter >> panesPresenter [
 	^ panesPresenter
 ]
 
 { #category : #accessing }
-DivagerInspector >> panesPresenter: anObject [
+DivagerPaginatedPanePresenter >> panesPresenter: anObject [
 	panesPresenter := anObject
 ]
 
 { #category : #accessing }
-DivagerInspector >> quantityPresenter [
+DivagerPaginatedPanePresenter >> quantityPresenter [
 	^ quantityPresenter
 ]
 
 { #category : #accessing }
-DivagerInspector >> quantityPresenter: anObject [
+DivagerPaginatedPanePresenter >> quantityPresenter: anObject [
 	quantityPresenter := anObject
+]
+
+{ #category : #initialization }
+DivagerPaginatedPanePresenter >> setModelBeforeInitialization: anObject [
+
+	object := anObject
 ]
