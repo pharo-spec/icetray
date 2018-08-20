@@ -42,6 +42,30 @@ DivagerPresenter >> addPane: aSpecPresenter [
 	self refresh
 ]
 
+{ #category : #adding }
+DivagerPresenter >> addTabPresenter [
+
+	self addPane: (self newTabManager
+		addTab: (self newTab 
+			label: 'Info';
+			icon: (self iconNamed: #smallQuestion);
+			closeable: false;
+			contents: 'Hello worldy1' asMorph
+			yourself);
+		addTab: (self newTab 
+			label: 'Info';
+			icon: (self iconNamed: #smallQuestion);
+			closeable: false;
+			contents: 'Hello worldy2' asMorph
+			yourself);
+		addTab: (self newTab 
+			label: 'Info';
+			icon: (self iconNamed: #smallQuestion);
+			closeable: false;
+			contents: 'Hello worldy3' asMorph
+			yourself)).
+]
+
 { #category : #accessing }
 DivagerPresenter >> addWidgetsTo: aRow [
 	(panes copyFrom: firstPane to: (firstPane + maxPanesToShow - 1 min: panes size))
@@ -76,7 +100,7 @@ DivagerPresenter >> initializeWidgets [
 
 	self
 		addButton;
-		addButton
+		addTabPresenter
 ]
 
 { #category : #adding }

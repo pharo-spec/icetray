@@ -16,7 +16,12 @@ DivagerInspector class >> defaultSpec [
 		newColumn: [:column |
 			column 
 				add: #panesPresenter;
-				add: #quantityPresenter height: 40 ]
+				newRow: [ :row |
+					row
+						newColumn: [ :empty ];
+						add: #quantityPresenter width: 150;
+						newColumn: [ :empty ] ]
+				height: 30 ]
 ]
 
 { #category : #initialization }
