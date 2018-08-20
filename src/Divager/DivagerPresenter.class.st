@@ -27,10 +27,10 @@ DivagerPresenter >> addPane: aSpecPresenter [
 		id: newPaneId;
 		yourself).
 	widgets at: newPaneId put: aSpecPresenter.	
-	firstPane := (panes size - maxPanesToShow + 1) max: 1.
+	firstPane := self calculateFirstPane.
 
 	aSpecPresenter whenSelectionChanged: [
-		panes := panes copyUpTo: aSpecPresenter.
+		panes := panes copyUpThrough: (panes detect: [ :any | any hasPresenter: aSpecPresenter ]).
 		self addPane: (self newTransitionTo: aSpecPresenter selection) ].
 
 	self valueChanged.
@@ -68,6 +68,12 @@ DivagerPresenter >> addWidgetsTo: aRow [
 ]
 
 { #category : #adding }
+DivagerPresenter >> calculateFirstPane [
+
+	^ ((panes size - maxPanesToShow + 1) max: 1)
+]
+
+{ #category : #adding }
 DivagerPresenter >> firstPage [
 	
 	^ firstPane
@@ -75,6 +81,8 @@ DivagerPresenter >> firstPage [
 
 { #category : #adding }
 DivagerPresenter >> firstPage: aPageNumber [
+
+	aPageNumber = firstPane ifTrue: [ ^ self ].
 
 	firstPane := aPageNumber.
 	self valueChanged.
@@ -99,8 +107,10 @@ DivagerPresenter >> maxPanesToShow [
 { #category : #adding }
 DivagerPresenter >> maxPanesToShow: aPageCount [
 
+	aPageCount = maxPanesToShow ifTrue: [ ^ self ].
+
 	maxPanesToShow := aPageCount.
-	firstPane := ((panes size - maxPanesToShow) min: firstPane) max: 1.
+	firstPane := self calculateFirstPane.
 	
 	self valueChanged.
 	self refresh

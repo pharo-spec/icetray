@@ -8,6 +8,12 @@ Class {
 	#category : #Divager
 }
 
+{ #category : #testing }
+DivagerPane >> hasPresenter: aPresenter [
+
+	^ presenter = aPresenter
+]
+
 { #category : #accessing }
 DivagerPane >> id [
 	^ id

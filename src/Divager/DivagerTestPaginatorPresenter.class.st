@@ -37,7 +37,7 @@ DivagerTestPaginatorPresenter >> initializeWidgets [
 	
 	firstPageTextInput := self newTextInput.
 	firstPageTextInput autoAccept: true.
-	firstPageTextInput whenTextChanged: [ 
+	firstPageTextInput whenTextChanged: [ :newText :oldText |
 		presenterToPaginate firstPage: (firstPageTextInput text asInteger ifNil: [ 1 ]) ].
 	
 	pageSeparatorLabel := self newLabel label: '/'.
@@ -46,7 +46,7 @@ DivagerTestPaginatorPresenter >> initializeWidgets [
 	
 	pageCountTextInput := self newTextInput.
 	pageCountTextInput autoAccept: true.
-	pageCountTextInput whenTextChanged: [ 
+	pageCountTextInput whenTextChanged: [ :newText :oldText |
 		presenterToPaginate maxPanesToShow: (pageCountTextInput text asInteger ifNil: [ 1 ]) ].
 	
 	self refreshValues.
