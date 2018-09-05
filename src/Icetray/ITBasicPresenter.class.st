@@ -31,6 +31,16 @@ ITBasicPresenter class >> new [
 	^ self owner: nil
 ]
 
+{ #category : #'instance creation' }
+ITBasicPresenter class >> on: aDomainObject [
+	| decorator |
+	decorator := self basicNewWithOwner: nil.
+	decorator decoree
+		setModelBeforeInitialization: aDomainObject;
+		initialize.	
+	^ decorator
+]
+
 { #category : #specs }
 ITBasicPresenter class >> owner: anOwningPresenter [
 
